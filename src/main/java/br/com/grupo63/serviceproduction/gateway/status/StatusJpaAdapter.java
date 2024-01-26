@@ -39,25 +39,11 @@ public class StatusJpaAdapter implements IStatusGateway {
     }
 
     @Override
-    public List<Status> findByDeletedFalse() {
-        return repository.findByDeletedFalse()
-                .stream()
-                .map(StatusPersistenceEntity::toModel)
-                .collect(Collectors.toList());
-    }
-
-    @Override
     public Status saveAndFlush(Status status) {
         StatusPersistenceEntity entity = new StatusPersistenceEntity(status);
 
         entity = repository.save(entity);
 
         return entity.toModel();
-    }
-
-    @Override
-    public Optional<Status> findByIdAndDeletedFalse(Long id) {
-        return repository.findByIdAndDeletedFalse(id)
-                .map(StatusPersistenceEntity::toModel);
     }
 }

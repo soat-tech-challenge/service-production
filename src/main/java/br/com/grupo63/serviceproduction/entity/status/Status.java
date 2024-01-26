@@ -12,7 +12,6 @@ import java.util.Map;
 import static java.util.Map.entry;
 
 @AllArgsConstructor
-@NoArgsConstructor
 @Getter
 @Setter
 public class Status {
