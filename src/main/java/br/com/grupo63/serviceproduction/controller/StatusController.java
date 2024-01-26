@@ -2,10 +2,10 @@ package br.com.grupo63.serviceproduction.controller;
 
 import br.com.grupo63.serviceproduction.controller.dto.StatusControllerDTO;
 import br.com.grupo63.serviceproduction.entity.status.OrderStatus;
-import br.com.grupo63.serviceproduction.exception.NotFoundException;
-import br.com.grupo63.serviceproduction.exception.ValidationException;
 import br.com.grupo63.serviceproduction.presenter.StatusPresenter;
 import br.com.grupo63.serviceproduction.usecase.status.StatusUseCase;
+import br.com.grupo63.techchallenge.common.exception.NotFoundException;
+import br.com.grupo63.techchallenge.common.exception.ValidationException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

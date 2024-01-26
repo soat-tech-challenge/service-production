@@ -1,7 +1,7 @@
 package br.com.grupo63.serviceproduction.entity.status;
 
 
-import br.com.grupo63.serviceproduction.exception.ValidationException;
+import br.com.grupo63.techchallenge.common.exception.ValidationException;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

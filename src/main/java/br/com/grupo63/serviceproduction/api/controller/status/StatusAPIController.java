@@ -1,18 +1,14 @@
-package br.com.grupo63.serviceproduction.api.controller.order;
+package br.com.grupo63.serviceproduction.api.controller.status;
 
-import br.com.grupo63.serviceproduction.api.controller.AbstractAPIController;
-import br.com.grupo63.serviceproduction.api.controller.dto.DefaultResponseDTO;
-import br.com.grupo63.serviceproduction.api.controller.order.dto.AdvanceOrderStatusResponseDTO;
+import br.com.grupo63.serviceproduction.api.controller.status.dto.AdvanceOrderStatusResponseDTO;
 import br.com.grupo63.serviceproduction.controller.StatusController;
 import br.com.grupo63.serviceproduction.controller.dto.StatusControllerDTO;
-import br.com.grupo63.serviceproduction.exception.NotFoundException;
-import br.com.grupo63.serviceproduction.exception.ValidationException;
+import br.com.grupo63.techchallenge.common.api.controller.AbstractAPIController;
+import br.com.grupo63.techchallenge.common.exception.NotFoundException;
+import br.com.grupo63.techchallenge.common.exception.ValidationException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -41,8 +37,8 @@ public class StatusAPIController extends AbstractAPIController {
             summary = "Avança com o status do pedido",
             description = "Após o pedido ser recebido, esse endpoint seria utilizado pelo funcionário para avançar o status do pedido")
     @PostMapping("/advance-status")
-    public AdvanceOrderStatusResponseDTO advanceOrderStatusFromOrderId(@Parameter(description = "Id do pedido.") @RequestParam int orderId) throws NotFoundException, ValidationException {
-        return new AdvanceOrderStatusResponseDTO(controller.advanceStatus(orderId));
+    public ResponseEntity<AdvanceOrderStatusResponseDTO> advanceOrderStatusFromOrderId(@Parameter(description = "Id do pedido.") @RequestParam int orderId) throws NotFoundException, ValidationException {
+        return ResponseEntity.ok(new AdvanceOrderStatusResponseDTO(controller.advanceStatus(orderId)));
     }
 
 }
