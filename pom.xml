@@ -161,8 +161,7 @@
                                 <configuration>
                                     <!-- Exclude DynamoDBConfig from coverage -->
                                     <excludes>
-                                        <exclude>**/br/com/grupo63/serviceproduction/config/DynamoDBConfig.class</exclude>
-                                    </excludes>
+                                        <exclude>**/serviceproduction/config/DynamoDBConfig.class</exclude>                                    </excludes>
                                 </configuration>
                             </execution>
                             <execution>
