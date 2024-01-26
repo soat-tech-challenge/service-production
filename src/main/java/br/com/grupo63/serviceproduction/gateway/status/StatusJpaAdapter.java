@@ -18,20 +18,17 @@ public class StatusJpaAdapter implements IStatusGateway {
 
     private final StatusJpaRepository repository;
 
-    private static final List<OrderStatus> UNFINISHED_STATUS =
-            Arrays
-                    .asList(
-                            OrderStatus.PREPARING,
-                            OrderStatus.RECEIVED,
-                            OrderStatus.READY);
+    private static final List<OrderStatus> UNFINISHED_STATUS = Arrays
+            .asList(
+                    OrderStatus.PREPARING,
+                    OrderStatus.RECEIVED,
+                    OrderStatus.READY);
 
     @Override
     public List<Status> findByStatusNotFinishedAndDeletedOrderByCreationDate() {
         return repository.findByDeletedFalseAndStatusIn(UNFINISHED_STATUS)
                 .stream()
-                .sorted(
-                        (entity1, entity2) ->
-                                entity2.getLastUpdateDate().compareTo(entity1.getLastUpdateDate()))
+                .sorted((entity1, entity2) -> entity2.getLastUpdateDate().compareTo(entity1.getLastUpdateDate()))
                 .map(StatusPersistenceEntity::toModel)
                 .collect(Collectors.toList());
     }

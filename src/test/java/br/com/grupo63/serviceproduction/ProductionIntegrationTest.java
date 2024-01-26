@@ -9,6 +9,7 @@ import br.com.grupo63.serviceproduction.gateway.status.StatusJpaAdapter;
 import br.com.grupo63.serviceproduction.gateway.status.StatusJpaRepository;
 import br.com.grupo63.serviceproduction.gateway.status.entity.StatusPersistenceEntity;
 import br.com.grupo63.serviceproduction.usecase.status.StatusUseCase;
+import br.com.grupo63.techchallenge.common.exception.ValidationException;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,8 +24,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
@@ -122,5 +122,16 @@ public class ProductionIntegrationTest {
         assertEquals(response.getBody().getNewStatus(), OrderStatus.FINISHED);
         verify(statusJpaRepository, times(1)).findByDeletedFalseAndOrder(anyInt());
         verify(statusJpaRepository, times(1)).save(any());
+    }
+
+    @SneakyThrows
+    @Test
+    public void testAdvanceStatusFinishedException_EndToEnd() {
+        when(statusJpaRepository.findByDeletedFalseAndOrder(defaultStatusPersistenceEntity.getOrder())).thenReturn(Optional.of(new StatusPersistenceEntity(defaultStatusPersistenceEntity.getId(), false, defaultStatusPersistenceEntity.getOrder(), OrderStatus.FINISHED, LocalDateTime.now())));
+        when(statusJpaRepository.save(new StatusPersistenceEntity(defaultStatusPersistenceEntity.getId(), false, defaultStatusPersistenceEntity.getOrder(), OrderStatus.FINISHED, any()))).thenReturn(new StatusPersistenceEntity(defaultStatusPersistenceEntity.getId(), false, defaultStatusPersistenceEntity.getOrder(), OrderStatus.FINISHED, LocalDateTime.now()));
+
+        assertThrows(ValidationException.class, () -> statusAPIController.advanceOrderStatusFromOrderId(defaultStatusPersistenceEntity.getOrder()));
+        verify(statusJpaRepository, times(1)).findByDeletedFalseAndOrder(anyInt());
+        verify(statusJpaRepository, times(0)).save(any());
     }
 }
