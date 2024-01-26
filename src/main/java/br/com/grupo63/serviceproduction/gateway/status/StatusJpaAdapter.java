@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -17,11 +18,7 @@ public class StatusJpaAdapter implements IStatusGateway {
 
     private final StatusJpaRepository repository;
 
-    private static final List<OrderStatus> UNFINISHED_STATUS = new ArrayList<>() {{
-        add(OrderStatus.PREPARING);
-        add(OrderStatus.READY);
-        add(OrderStatus.RECEIVED);
-    }};
+    private static final List<OrderStatus> UNFINISHED_STATUS = Arrays.asList(OrderStatus.PREPARING, OrderStatus.RECEIVED, OrderStatus.READY);
 
     @Override
     public List<Status> findByStatusNotFinishedAndDeletedOrderByCreationDate() {
