@@ -18,7 +18,11 @@ public class StatusJpaAdapter implements IStatusGateway {
 
     private final StatusJpaRepository repository;
 
-    private static final List<OrderStatus> UNFINISHED_STATUS = Arrays.asList(OrderStatus.PREPARING, OrderStatus.RECEIVED, OrderStatus.READY);
+    private static final List<OrderStatus> UNFINISHED_STATUS = Arrays
+            .asList(
+                    OrderStatus.PREPARING,
+                    OrderStatus.RECEIVED,
+                    OrderStatus.READY);
 
     @Override
     public List<Status> findByStatusNotFinishedAndDeletedOrderByCreationDate() {
