@@ -58,6 +58,9 @@ public class ProductionIntegrationTest {
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertNotNull(response.getBody());
         assertEquals(response.getBody().size(), 1);
+        assertEquals(response.getBody().get(0).getStatus(), defaultStatusPersistenceEntity.getStatus());
+        assertEquals(response.getBody().get(0).getOrder(), defaultStatusPersistenceEntity.getOrder());
+        assertEquals(response.getBody().get(0).getId(), defaultStatusPersistenceEntity.getId());
         verify(statusJpaRepository, times(1)).findByDeletedFalseAndStatusIn(any());
     }
 
