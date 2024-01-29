@@ -11,7 +11,9 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
+@Setter
 
 @DynamoDBTable(tableName = "status")
 public class StatusPersistenceEntity {
