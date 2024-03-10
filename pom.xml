@@ -13,7 +13,7 @@
     <artifactId>serviceproduction</artifactId>
     <version>4.1.3</version>
     <name>Service Production</name>
-    <description>FIAP SOAT1 2023 - Group 63 - Phase 4</description>
+    <description>FIAP SOAT1 2023 - Group 63 - Phase 5 - Production microservice</description>
     <properties>
         <java.version>17</java.version>
         <sonar.coverage.exclusions>
