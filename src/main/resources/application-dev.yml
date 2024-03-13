@@ -13,6 +13,15 @@ spring:
   flyway:
     locations: classpath:db/migrations/{vendor}/
     enabled: true
+  cloud:
+    aws:
+      credentials:
+        access-key: "${AMAZON_AWS_ACCESSKEY:accesskey}"
+        secret-key: "${AMAZON_AWS_SECRETKEY:secretkey}"
+      region:
+        static: "us-east-2"
+      sqs:
+        endpoint: "${AMAZON_AWS_SQS_ENDPOINT:endpoint}"
 jwt:
   token:
     key:
@@ -23,6 +32,8 @@ amazon:
   aws:
     accesskey: "${AMAZON_AWS_ACCESSKEY:accesskey}"
     secretkey: "${AMAZON_AWS_SECRETKEY:secretkey}"
+
 server:
+  port: 8082
   servlet:
     context-path: "/production"
