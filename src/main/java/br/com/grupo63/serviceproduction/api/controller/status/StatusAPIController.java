@@ -6,7 +6,6 @@ import br.com.grupo63.serviceproduction.controller.dto.StatusControllerDTO;
 import br.com.grupo63.techchallenge.common.api.controller.AbstractAPIController;
 import br.com.grupo63.techchallenge.common.exception.NotFoundException;
 import br.com.grupo63.techchallenge.common.exception.ValidationException;
-import io.awspring.cloud.sqs.operations.SqsTemplate;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -23,15 +22,6 @@ import java.util.List;
 public class StatusAPIController extends AbstractAPIController {
 
     private final StatusController controller;
-    private final SqsTemplate sqsTemplate;
-
-    @GetMapping("/batata")
-    public void batata() {
-        sqsTemplate.send(sqsSendOptions ->
-                sqsSendOptions
-                        .queue("approvedPayments.fifo")
-                        .payload(12));
-    }
 
     @Operation(
             tags = "5ª chamada - Fluxo principal - Acompanhamento e entrega",

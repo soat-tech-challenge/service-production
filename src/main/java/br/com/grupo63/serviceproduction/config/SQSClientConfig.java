@@ -1,6 +1,5 @@
 package br.com.grupo63.serviceproduction.config;
 
-import io.awspring.cloud.sqs.operations.SqsTemplate;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -29,10 +28,5 @@ class SQSClientConfig {
                 .credentialsProvider(StaticCredentialsProvider
                         .create(AwsBasicCredentials.create(accessKey, secretKey)))
                 .build();
-    }
-
-    @Bean
-    public SqsTemplate sqsTemplate(SqsAsyncClient sqsAsyncClient){
-        return SqsTemplate.builder().sqsAsyncClient(sqsAsyncClient).build();
     }
 }

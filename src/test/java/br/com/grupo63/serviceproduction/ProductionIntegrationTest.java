@@ -45,7 +45,7 @@ public class ProductionIntegrationTest {
         MockitoAnnotations.openMocks(this);
         statusUseCase = new StatusUseCase(statusJpaAdapter);
         statusController = new StatusController(statusUseCase);
-        statusAPIController = new StatusAPIController(statusController, null);
+        statusAPIController = new StatusAPIController(statusController);
     }
 
     @SneakyThrows
