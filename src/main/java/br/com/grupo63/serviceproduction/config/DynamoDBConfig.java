@@ -44,7 +44,7 @@ public class DynamoDBConfig {
     }
 
     @Bean
-    public AWSCredentials awsCredentials() {
+    public AWSCredentials AWSCredentials() {
         if (awsSessionToken == null || awsSessionToken.isBlank()) {
             return new BasicAWSCredentials(
                     awsAccessKey, awsSecretKey);
