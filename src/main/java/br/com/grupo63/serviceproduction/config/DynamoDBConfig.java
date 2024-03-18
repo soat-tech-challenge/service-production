@@ -32,9 +32,9 @@ public class DynamoDBConfig {
     private String awsSessionToken;
 
     @Bean
-    public AmazonDynamoDB amazonDynamoDB() {
+    public AmazonDynamoDB amazonDynamoDB(AWSCredentials awsCredentials) {
         AmazonDynamoDB amazonDynamoDB
-                = new AmazonDynamoDBClient(awsCredentials());
+                = new AmazonDynamoDBClient(awsCredentials);
 
         if (!StringUtils.isEmpty(awsDynamoDBEndpoint)) {
             amazonDynamoDB.setEndpoint(awsDynamoDBEndpoint);
@@ -44,7 +44,7 @@ public class DynamoDBConfig {
     }
 
     @Bean
-    public AWSCredentials awsCredentials() {
+    public AWSCredentials AWSCredentials() {
         if (awsSessionToken == null || awsSessionToken.isBlank()) {
             return new BasicAWSCredentials(
                     awsAccessKey, awsSecretKey);
